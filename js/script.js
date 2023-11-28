@@ -14,9 +14,6 @@ const butClear = document.getElementById("butClear");
 const butErase = document.getElementById("butErase");
 const butProgram = document.getElementById("butProgram");
 const autoscroll = document.getElementById("autoscroll");
-const lightSS = document.getElementById("light");
-const darkSS = document.getElementById("dark");
-const darkMode = document.getElementById("darkmode");
 const firmware = document.querySelectorAll(".upload .firmware input");
 const progress = document.querySelectorAll(".upload .progress-bar");
 const offsets = document.querySelectorAll(".upload .offset");
@@ -44,7 +41,6 @@ document.addEventListener("DOMContentLoaded", () => {
   }
   autoscroll.addEventListener("click", clickAutoscroll);
   baudRate.addEventListener("change", changeBaudRate);
-  darkMode.addEventListener("click", clickDarkMode);
   window.addEventListener("error", function (event) {
     console.log("Got an uncaught error: ", event.error);
   });
@@ -60,7 +56,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
   initBaudRate();
   loadAllSettings();
-  updateTheme();
   logMsg("ESP Web Flasher loaded.");
 });
 
@@ -143,25 +138,6 @@ function errorMsg(text) {
   console.log(text);
 }
 
-/**
- * @name updateTheme
- * Sets the theme to  Adafruit (dark) mode. Can be refactored later for more themes
- */
-function updateTheme() {
-  // Disable all themes
-  document
-    .querySelectorAll("link[rel=stylesheet].alternate")
-    .forEach((styleSheet) => {
-      enableStyleSheet(styleSheet, false);
-    });
-
-  if (darkMode.checked) {
-    enableStyleSheet(darkSS, true);
-  } else {
-    enableStyleSheet(lightSS, true);
-  }
-}
-
 function enableStyleSheet(node, enabled) {
   node.disabled = !enabled;
 }
@@ -233,15 +209,6 @@ async function changeBaudRate() {
  */
 async function clickAutoscroll() {
   saveSetting("autoscroll", autoscroll.checked);
-}
-
-/**
- * @name clickDarkMode
- * Change handler for the Dark Mode checkbox.
- */
-async function clickDarkMode() {
-  updateTheme();
-  saveSetting("darkmode", darkMode.checked);
 }
 
 /**
@@ -422,7 +389,6 @@ function loadAllSettings() {
   // Load all saved settings or defaults
   autoscroll.checked = loadSetting("autoscroll", true);
   baudRate.value = loadSetting("baudrate", 115200);
-  darkMode.checked = loadSetting("darkmode", false);
 }
 
 function loadSetting(setting, defaultValue) {
