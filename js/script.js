@@ -49,14 +49,12 @@ document.addEventListener("DOMContentLoaded", () => {
     console.log("Got an uncaught error: ", event.error);
   });
   if ("serial" in navigator) {
-    const notSupported = document.getElementById("notSupported");
-    notSupported.classList.add("hidden");
-
-    
-
+    // const notSupported = document.getElementById("notSupported");
+    // notSupported.classList.add("hidden");
   }
   else {
     let myModal = new bootstrap.Modal(document.getElementById('staticBackdrop'), {});
+    document.getElementsByClassName("btn-close")[0].classList.add("hidden");
     myModal.show();
   }
 
