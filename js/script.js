@@ -51,6 +51,13 @@ document.addEventListener("DOMContentLoaded", () => {
   if ("serial" in navigator) {
     const notSupported = document.getElementById("notSupported");
     notSupported.classList.add("hidden");
+
+    
+
+  }
+  else {
+    let myModal = new bootstrap.Modal(document.getElementById('staticBackdrop'), {});
+    myModal.show();
   }
 
   initBaudRate();
@@ -211,7 +218,9 @@ async function clickConnect() {
  * Change handler for the Baud Rate selector.
  */
 async function changeBaudRate() {
+  console.log("here");
   saveSetting("baudrate", baudRate.value);
+  document.getElementById("baudRateText").innerHTML = baudRate.value;
   if (espStub) {
     let baud = parseInt(baudRate.value);
     if (baudRates.includes(baud)) {
@@ -440,4 +449,8 @@ function ucWords(text) {
 
 function sleep(ms) {
   return new Promise((resolve) => setTimeout(resolve, ms));
+}
+
+function reset() {
+  document.getElementById("log").innerHTML = "";
 }

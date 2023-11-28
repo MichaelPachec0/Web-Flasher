@@ -94,9 +94,7 @@ div.clear {
   padding-top: 80px;
 }
 
-.hidden {
-  display: none;
-}
+
 
 .notSupported {
   padding: 1em;
@@ -171,6 +169,10 @@ div.clear {
 .status {
   height: 10px;
   width: 100%;
+}
+
+.hidden {
+  display: none;
 }
 
 /*
@@ -398,3 +400,9 @@ div.clear {
 .center {
   text-align: center;
 }  */
+
+
+.form-select {
+  width: auto !important;
+  display: inline-block;
+}
