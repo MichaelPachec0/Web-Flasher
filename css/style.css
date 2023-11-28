@@ -166,7 +166,7 @@ div.clear {
   display: none;
 }
 
-.status {
+#status {
   height: 10px;
   width: 100%;
 }

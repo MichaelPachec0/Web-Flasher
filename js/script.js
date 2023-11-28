@@ -377,8 +377,13 @@ function toggleUIToolbar(show) {
 
 function toggleUIConnected(connected) {
   let lbl = "Connect";
+  document.getElementById("status").classList = "";
+  document.getElementById("status").classList.add("bg-danger");
+
   if (connected) {
     lbl = "Disconnect";
+    document.getElementById("status").classList = "";
+    document.getElementById("status").classList.add("bg-success");
   } else {
     toggleUIToolbar(false);
   }
