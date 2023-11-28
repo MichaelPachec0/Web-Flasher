@@ -261,10 +261,10 @@ async function clickProgram() {
   baudRate.disabled = true;
   butErase.disabled = true;
   butProgram.disabled = true;
-  for (let i = 0; i < 4; i++) {
-    firmware[i].disabled = true;
-    offsets[i].disabled = true;
-  }
+  // for (let i = 0; i < 4; i++) {
+    firmware[0].disabled = true;
+    offsets[0].disabled = true;
+  // }
   for (let file of getValidFiles()) {
     progress[file].classList.remove("hidden");
     let binfile = firmware[file].files[0];
@@ -285,12 +285,12 @@ async function clickProgram() {
       errorMsg(e);
     }
   }
-  for (let i = 0; i < 4; i++) {
-    firmware[i].disabled = false;
-    offsets[i].disabled = false;
-    progress[i].classList.add("hidden");
-    progress[i].querySelector("div").style.width = "0";
-  }
+  // for (let i = 0; i < 4; i++) {
+    firmware[0].disabled = false;
+    offsets[0].disabled = false;
+    progress[0].classList.add("hidden");
+    progress[0].querySelector("div").style.width = "0";
+  // }
   butErase.disabled = false;
   baudRate.disabled = false;
   butProgram.disabled = getValidFiles().length == 0;
@@ -303,13 +303,13 @@ function getValidFiles() {
   // and will also return a list of files to program
   let validFiles = [];
   let offsetVals = [];
-  for (let i = 0; i < 4; i++) {
-    let offs = parseInt(offsets[i].value, 16);
-    if (firmware[i].files.length > 0 && !offsetVals.includes(offs)) {
-      validFiles.push(i);
+  // for (let i = 0; i < 4; i++) {
+    let offs = parseInt(offsets[0].value, 16);
+    if (firmware[0].files.length > 0 && !offsetVals.includes(offs)) {
+      validFiles.push(0);
       offsetVals.push(offs);
     }
-  }
+  // }
   return validFiles;
 }
 
@@ -363,10 +363,10 @@ function convertJSON(chunk) {
 
 function toggleUIToolbar(show) {
   isConnected = show;
-  for (let i = 0; i < 4; i++) {
-    progress[i].classList.add("hidden");
-    progress[i].querySelector("div").style.width = "0";
-  }
+  // for (let i = 0; i < 4; i++) {
+    progress[0].classList.add("hidden");
+    progress[0].querySelector("div").style.width = "0";
+  // }
   if (show) {
     appDiv.classList.add("connected");
   } else {
