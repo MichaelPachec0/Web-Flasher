@@ -158,7 +158,8 @@ div.clear {
   background-color: #000;
   color: #cecece;
 
-  height: 60vh;
+  min-height: 60vh;
+  height: 100%;
   border-radius: 10px;
 }
 
