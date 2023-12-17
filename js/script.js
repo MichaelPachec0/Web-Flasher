@@ -15,7 +15,7 @@ const butErase = document.getElementById("butErase");
 const butProgram = document.getElementById("butProgram");
 const autoscroll = document.getElementById("autoscroll");
 const firmware = document.querySelectorAll(".upload .firmware input");
-const progress = document.querySelectorAll(".upload .progress-bar");
+const progress = document.querySelectorAll(".upload .progress");
 const offsets = document.querySelectorAll(".upload .offset");
 const appDiv = document.getElementById("app");
 
@@ -327,18 +327,18 @@ async function checkProgrammable() {
  */
 async function checkFirmware(event) {
   let filename = event.target.value.split("\\").pop();
-  let label = event.target.parentNode.querySelector("span");
+  // let label = event.target.parentNode.querySelector("span");
   let icon = event.target.parentNode.querySelector("svg");
   if (filename != "") {
     if (filename.length > 17) {
-      label.innerHTML = filename.substring(0, 14) + "&hellip;";
+      // label.innerHTML = filename.substring(0, 14) + "&hellip;";
     } else {
-      label.innerHTML = filename;
+      // label.innerHTML = filename;
     }
-    icon.classList.add("hidden");
+    // icon.classList.add("hidden");
   } else {
     label.innerHTML = "Choose a file&hellip;";
-    icon.classList.remove("hidden");
+    // icon.classList.remove("hidden");
   }
 
   await checkProgrammable();
@@ -364,8 +364,8 @@ function convertJSON(chunk) {
 function toggleUIToolbar(show) {
   isConnected = show;
   // for (let i = 0; i < 4; i++) {
-    progress[0].classList.add("hidden");
-    progress[0].querySelector("div").style.width = "0";
+    // progress[0].classList.add("hidden");
+    // progress[0].querySelector("div").style.width = "0";
   // }
   if (show) {
     appDiv.classList.add("connected");

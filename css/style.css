@@ -176,6 +176,16 @@ div.clear {
   display: none;
 }
 
+.progress-bar {
+  height: 24px;
+}
+
+.progress-bar > div {
+  height: 24px;
+  background-color: #71ae1e;
+  width: 0;
+}
+
 /*
 .footer {
   padding-left: 70px;
