@@ -175,7 +175,8 @@ document.addEventListener("DOMContentLoaded", async () => {
         }
         console.log(fwModel);
         console.log(fwModel.browser_download_url);
-        modelElem.innerText = fwModel.name;
+        let name = fwModel.name.split("_")[2].slice(0,-7);
+        modelElem.innerText = name;
         modelElem.setAttribute("data-download", fwModel.browser_download_url);
         modelElem.classList.add(["dropdown-item"]);
         console.log(`fwModel: ${modelElem.innerText}`);
@@ -184,8 +185,8 @@ document.addEventListener("DOMContentLoaded", async () => {
           // should there be more logic here? the program button logic takes care of download
           // and i don't want to have another global.
 
-          ghURL = modelElem.getAttribute("data-download");
-          modelBtn.innerText = `Model: ${modelElem.innerText}`;
+          ghURL = `data/${fwModel.name}`;
+          modelBtn.innerText = `Model: ${name}`;
           butProgram.disabled = false;
           butErase.disabled = false;
         });
@@ -457,14 +458,23 @@ async function ghRelFwProgram() {
 
   // WARN: THIS IS ONLY FOR DEV, YOU NEED TO GET PERMS TO USE.
   // only use cors proxy if this is not prod
-  // TODO: setup separate cors anywhere proxy
-  const proxy = "https://cors-anywhere.herokuapp.com";
-  const localUrl =
-    window.location.hostname === "localhost" ? `${proxy}/${ghURL}` : ghURL;
+  // TODO: setup separate cors anywhere proxyj
+  console.log(`${ghURL}`);
+  const localUrl = ghURL;
 
   const binReq = fetch(localUrl);
+  let binResp;
   // decide how far we want to push this out.
-  const binResp = await binReq;
+  try {
+    binResp = await binReq;
+  } catch (e) {
+    console.log(`ITS DEAD JIM! ${ghURL} e: ${e}`);
+    return;
+  }
+
+  for (const pair of binResp.headers.entries()) {
+    console.log(pair[0] + ": " + pair[1]);
+  }
   if (!binResp.ok) {
     // TODO: decide if this is recoverable
     console.log("download failed!");
@@ -587,8 +597,8 @@ async function clickProgram() {
   butProgram.disabled = true;
 
   // for (let i = 0; i < 4; i++) {
-    firmware[0].disabled = true;
-    offsets[0].disabled = true;
+  firmware[0].disabled = true;
+  offsets[0].disabled = true;
   // }
   // not needed by both routes this is custom fw specific
   const validFiles = getValidFiles();
@@ -631,10 +641,10 @@ async function clickProgram() {
     }
   }
   // for (let i = 0; i < 4; i++) {
-    firmware[0].disabled = false;
-    offsets[0].disabled = false;
-    progress[0].classList.add("hidden");
-    progress[0].querySelector("div").style.width = "0";
+  firmware[0].disabled = false;
+  offsets[0].disabled = false;
+  progress[0].classList.add("hidden");
+  progress[0].querySelector("div").style.width = "0";
   // }
   butErase.disabled = false;
   baudRate.disabled = false;
@@ -652,11 +662,11 @@ function getValidFiles() {
   let validFiles = [];
   let offsetVals = [];
   // for (let i = 0; i < 4; i++) {
-    let offs = parseInt(offsets[0].value, 16);
-    if (firmware[0].files.length > 0 && !offsetVals.includes(offs)) {
-      validFiles.push(0);
-      offsetVals.push(offs);
-    }
+  let offs = parseInt(offsets[0].value, 16);
+  if (firmware[0].files.length > 0 && !offsetVals.includes(offs)) {
+    validFiles.push(0);
+    offsetVals.push(offs);
+  }
   // }
   return validFiles;
 }
@@ -712,8 +722,8 @@ function convertJSON(chunk) {
 function toggleUIToolbar(show) {
   isConnected = show;
   // for (let i = 0; i < 4; i++) {
-    // progress[0].classList.add("hidden");
-    // progress[0].querySelector("div").style.width = "0";
+  // progress[0].classList.add("hidden");
+  // progress[0].querySelector("div").style.width = "0";
   // }
   if (show) {
     appDiv.classList.add("connected");
