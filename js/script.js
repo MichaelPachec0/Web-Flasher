@@ -462,9 +462,13 @@ async function ghRelFwProgram() {
   const localUrl =
     window.location.hostname === "localhost" ? `${proxy}/${ghURL}` : ghURL;
 
-  const binReq = fetch(localUrl);
+  const binReq = fetch(localUrl, {});
   // decide how far we want to push this out.
   const binResp = await binReq;
+
+  for (const pair of binResp.headers.entries()) {
+    console.log(pair[0] + ": " + pair[1]);
+  }
   if (!binResp.ok) {
     // TODO: decide if this is recoverable
     console.log("download failed!");
@@ -587,8 +591,8 @@ async function clickProgram() {
   butProgram.disabled = true;
 
   // for (let i = 0; i < 4; i++) {
-    firmware[0].disabled = true;
-    offsets[0].disabled = true;
+  firmware[0].disabled = true;
+  offsets[0].disabled = true;
   // }
   // not needed by both routes this is custom fw specific
   const validFiles = getValidFiles();
@@ -631,10 +635,10 @@ async function clickProgram() {
     }
   }
   // for (let i = 0; i < 4; i++) {
-    firmware[0].disabled = false;
-    offsets[0].disabled = false;
-    progress[0].classList.add("hidden");
-    progress[0].querySelector("div").style.width = "0";
+  firmware[0].disabled = false;
+  offsets[0].disabled = false;
+  progress[0].classList.add("hidden");
+  progress[0].querySelector("div").style.width = "0";
   // }
   butErase.disabled = false;
   baudRate.disabled = false;
@@ -652,11 +656,11 @@ function getValidFiles() {
   let validFiles = [];
   let offsetVals = [];
   // for (let i = 0; i < 4; i++) {
-    let offs = parseInt(offsets[0].value, 16);
-    if (firmware[0].files.length > 0 && !offsetVals.includes(offs)) {
-      validFiles.push(0);
-      offsetVals.push(offs);
-    }
+  let offs = parseInt(offsets[0].value, 16);
+  if (firmware[0].files.length > 0 && !offsetVals.includes(offs)) {
+    validFiles.push(0);
+    offsetVals.push(offs);
+  }
   // }
   return validFiles;
 }
@@ -712,8 +716,8 @@ function convertJSON(chunk) {
 function toggleUIToolbar(show) {
   isConnected = show;
   // for (let i = 0; i < 4; i++) {
-    // progress[0].classList.add("hidden");
-    // progress[0].querySelector("div").style.width = "0";
+  // progress[0].classList.add("hidden");
+  // progress[0].querySelector("div").style.width = "0";
   // }
   if (show) {
     appDiv.classList.add("connected");
