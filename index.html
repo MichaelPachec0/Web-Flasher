@@ -35,7 +35,7 @@
     /> -->
 
     <!-- import the webpage's javascript file -->
-    <script module>
+    <script type="module">
       window.esptoolPackage = import(
         // In development we import locally.
         window.location.hostname === "localhost"
@@ -43,7 +43,7 @@
           : "https://unpkg.com/esp-web-flasher@5.1.4/dist/web/index.js?module"
       );
     </script>
-    <script src="js/script.js" module defer></script>
+    <script src="js/script.js" type="module"></script>
   </head>
   <body>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
@@ -97,14 +97,14 @@
               <button type="button" class="btn btn-outline-dark dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false" id="baudRate" value="1">
                 Baud: <p id="baudRateText"></p>
               </button>
-              <ul class="dropdown-menu" id="baudRateOptions"
-                <!-- <li><a class="dropdown-item" href="#">115200</a></li> -->
-                <!-- <li><a class="dropdown-item" href="#">Another action</a></li>
+              <ul class="dropdown-menu" id="baudRateOptions">
+                <li><a class="dropdown-item" href="#">115200</a></li> 
+                <li><a class="dropdown-item" href="#">Another action</a></li>
                 <li><a class="dropdown-item" href="#">921600</a></li>
                 <li><hr class="dropdown-divider"></li>
                 <li><a class="dropdown-item" href="#">Separated link</a></li> 
               </ul>
-            </div>--->
+            </div> -->
             <select class="form-select" id ="baudRate" aria-label="Default select example">
             </select>
 
@@ -113,8 +113,8 @@
 
               <div style="display: inline-block" class="ms-3">
                 <span class="form-check form-switch" style="display: inline-block">
-                  <input class="form-check-input" type="checkbox" role="switch" id="autoscroll" checked>
-                  <label class="form-check-label" for="flexSwitchCheckChecked">Autoscroll</label>
+                  <input class="form-check-input" type="checkbox" role="switch" id="autoscroll" aria-checked="true">
+                  <label class="form-check-label" for="autoscroll">Autoscroll</label>
                 </span>
               </div>
 
@@ -308,6 +308,7 @@ Welcome to the Web Flasher! =^._.^= <br>
       <div class="my-5" style="text-align: center;">
         <a href="https://devkitty.io">DevKitty.io</a>
       </div>
+    </div>
 
 
   </body>
