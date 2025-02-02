@@ -175,7 +175,7 @@ document.addEventListener("DOMContentLoaded", async () => {
         }
         console.log(fwModel);
         console.log(fwModel.browser_download_url);
-        let name = fwModel.name.split("_")[2].slice(0,-7);
+        let name = fwModel.name.split("_")[2].slice(0, -7);
         modelElem.innerText = name;
         modelElem.setAttribute("data-download", fwModel.browser_download_url);
         modelElem.classList.add(["dropdown-item"]);
@@ -212,12 +212,15 @@ function csvParse(csv) {
   const descRow = rows[0].split(",");
   for (let idx = 1; idx < rows.length; idx++) {
     const row = rows[idx].split(",");
+    const key = stripQuotes(row[0]);
+    // HACK: parsing this csv may add an extra newline, take that into account here
+    if (key === "") {
+      continue;
+    }
     const data = new Map();
     for (let dataIdx = 1; dataIdx < row.length; dataIdx++) {
       data.set(descRow[dataIdx], stripQuotes(row[dataIdx]));
     }
-    const key = stripQuotes(row[0]);
-    console.log(data);
     dict.set(key, data);
   }
   return dict;
