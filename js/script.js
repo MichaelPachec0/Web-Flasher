@@ -723,7 +723,7 @@ function convertJSON(chunk) {
 }
 
 function toggleUIToolbar(show) {
-  isConnected = show;
+  // isConnected = show;
   // for (let i = 0; i < 4; i++) {
   // progress[0].classList.add("hidden");
   // progress[0].querySelector("div").style.width = "0";
